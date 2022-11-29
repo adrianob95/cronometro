@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Ceevee 2.0</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/vendor.css">
+
+    <!-- script
+    ================================================== -->
+    <script defer src="js/vendor/fontawesome/all.min.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top" class="ss-preload">
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+
+    <!-- header
+    ================================================== -->
+    
+
+    <!-- hero
+    ================================================== -->
+    <section id="hero" class="s-hero target-section">
+
+
+        <div class="s-hero__bg rellax" data-rellax-speed="-7"></div>
+ 
+
+        <div class="row s-hero__content">
+          
+            <div class="column">
+ 
+      
+
+                   
+                   <h1><span style="font-size: 35px; margin-right: 15px;">São: </span><span id="horaatual">00</span></h1>
+                    
+                    <h1><span style="font-size: 35px; margin-right: 10px;">Vai até: </span><span><input step="2" id="horafinal" onchange="cronometrar(this.value);" type="time" autofocus name="horafinal"></span></h1>
+        <h1><span style="font-size: 35px;">Faltam:</span></h1>
+                   <h1 style="font-size: 180px;"><span id="hora"></span><span id="minuto"></span><span></span><span id="segundo">00</span></h1>
+                  
+
+                </div> <!-- end s-hero__content-about -->
+ 
+        </div> <!-- s-hero__content -->
+
+        
+    </section> <!-- end s-hero -->\
+ 
+    <script>
+        let segundos = 0;
+        let minutos = 0;
+    document.getElementById('horaatual').innerHTML = new Date().toLocaleTimeString();
+
+        function segundo() {
+            //incrementa os segundos
+            segundos++;
+            if (segundos == 60) {
+                //incrementa os minutos
+                minutos++;
+                //Zerar os segundos
+                segundos = 0;
+                //escreve os minutos
+                document.getElementById('minuto').innerHTML = minutos
+            }
+            //escreve os segundos
+            document.getElementById('segundo').innerHTML = segundos
+            document.getElementById('horaatual').innerHTML = new Date().toLocaleTimeString();
+            var a = document.getElementById('horafinal').value;
+            var dataf = new Date();
+            dataf.setHours(parseInt(a.split(':')[0]));
+            dataf.setMinutes(parseInt(a.split(':')[1]));
+            dataf.setSeconds(parseInt(a.split(':')[2]));
+           var diferenca = new Date(dataf - new Date());
+            var resultado = diferenca.getUTCHours() + "h ";
+            resultado += diferenca.getUTCMinutes() + "m ";
+            resultado += diferenca.getUTCSeconds() + "s ";
+
+            document.getElementById('segundo').innerHTML = resultado; 
+
+           
+            return diferenca;
+        }
+
+        var meuInterval = setInterval(function () { var diferenca = segundo();
+
+        if(diferenca.getUTCHours() == 0 && diferenca.getUTCMinutes() == 0 && diferenca.getUTCSeconds() == 0){
+            clearInterval(meuInterval);
+
+        }
+        }, 1000);
+        function cronometrar(input) {
+          meuInterval;
+    }
+    </script>
+
+  
+  
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
